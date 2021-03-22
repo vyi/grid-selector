@@ -184,6 +184,7 @@ function setupEvents(grid) {
     grid.addEventListener("click", event => {
         let el = event.target;
         el.classList.toggle("active");
+        event.stopPropagation();
     });
 }
 </script>
