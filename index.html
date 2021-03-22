@@ -1,0 +1,188 @@
+<html>
+
+<head>
+	<title>Grid App</title>
+    <script>
+    // Keep this here at the top so that these values are available to all functions afterwards.
+	// Learn more about hoisting https://cybercafe.dev/understanding-javascript-hoisting/
+	const ROWS = 5;
+	const COLUMNS = 5;
+	
+	const messageService = {
+		clear: () => {
+			let msgBox = document.getElementById("message");
+			msgBox.innerHTML = "";
+		},
+		log: message => {
+			let msgBox = document.getElementById("message");
+			let row = document.createElement("div");
+			row.classList.add("message-row")
+			let timestamp = document.createElement("div");
+			timestamp.classList.add("ts");
+			let ts = new Date();
+			timestamp.classList.add("ts");
+			timestamp.innerHTML = ts.toLocaleTimeString([], {hour12: false}) + " => ";
+			let msgEl = document.createElement("div");
+			msgEl.classList.add("msg");
+			msgEl.innerHTML = message;
+			row.appendChild(timestamp);
+			row.appendChild(msgEl);
+			msgBox.appendChild(row);
+		}
+	};
+
+	function getSelectedCells() {
+		// get all selected divs
+		var selectedElements = document.querySelectorAll(".grid .box.active");
+		var data = [];
+		selectedElements.forEach(item => {
+			// get the data attribute of the element
+  		  	data.push(item.dataset["point"]);    
+		});
+		return data;
+	}
+
+	//click send button
+	function onSendClick(event) {
+		let data = getSelectedCells();
+		// do whaever you can here with selected values
+		messageService.log("Sent : " + JSON.stringify(data));
+	}
+
+	function onConnectClick(event) {
+		let data = getSelectedCells();
+		// do whaever you can here with selected values
+		messageService.log("Connect : " + JSON.stringify(data));
+	}
+
+	function onClearLogClick(){
+		messageService.clear();
+	}
+
+	function onReleaseClick() {
+
+	}
+
+	function onSelectAllClick() {
+		let cells = document.querySelectorAll(".grid .box");
+		cells.forEach( cell => {
+			cell.classList.add("active");
+		});
+	}
+
+	function onClearAllClick() {
+		let cells = document.querySelectorAll(".grid .box");
+		cells.forEach( cell => {
+			cell.classList.remove("active");
+		});
+	}
+
+	</script>
+    <style>
+        #main {
+			width: 60%;
+			margin: auto;
+		}
+		.grid {
+			/*display: flex;*/
+		}
+		.row {
+			display: flex;
+		}
+		.box {
+			width: 100%;
+			height: 100px;
+			border: 2px solid seashell;
+			cursor: pointer;
+			background: rgba(100, 100, 100, .5);
+			transition-duration: .5s;
+		}
+		.box.active {
+			background: green;
+			border-radius: 25px;
+		}
+		.list {
+			display: flex;
+			justify-content: space-evenly;
+		}
+
+		.list input{
+			padding: 15px;
+    		font-size: 1.2rem;
+		}
+
+		.message-row {
+			padding: 5px;
+			color: brown;
+		}
+		.message-row .msg{
+			display: inline;
+			word-break: break-all;
+		}
+		.ts {
+			display: inline;
+			color: dimgrey;
+		}
+	</style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div id="main">
+            <div id="grid" class="grid">
+            </div>
+            <br />
+            <div class="list">
+            	<!-- Add remove buttons and corresponding listeners -->
+    	         <input type="button" name="selectAll" value="Select all" onClick="onSelectAllClick(event)" />
+                <input type="button" name="clearAll" value="Clear All" onClick="onClearAllClick(event)" />
+                <input type="button" name="connect" value="Connect" onClick="onConnectClick(event)" />
+                <input type="button" name="send" value="Send" onClick="onSendClick(event)" />
+                <input type="button" name="release" value="Release" onClick="onReleaseClick(event)" />
+                <input type="button" name="clearLog" value="Clear Log" onClick="onClearLogClick(event)" />
+
+            </div>
+            <br />
+            <div id="message">
+            	
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+
+// Create grid
+let grid = document.getElementById("grid");	
+
+// You can create multiple grids by sending unique grid elements.
+createGrid(grid, ROWS, COLUMNS);
+setupEvents(grid);
+
+function initMessaging(el) {
+
+}
+
+function createGrid(grid, rows, cols) {    
+    for (let i = 0; i < rows; i++) {
+        let row = document.createElement("div");
+        row.classList.add("row");
+        for (let j = 0; j < cols; j++) {
+            let cell = document.createElement("div");
+            // Add the point value to the cell to read selected cells later on
+            cell.dataset["point"] = String([i, j]);
+            cell.classList.add("box");
+            row.appendChild(cell);
+        }
+        grid.appendChild(row);
+    }
+}
+
+function setupEvents(grid) {
+    grid.addEventListener("click", event => {
+        let el = event.target;
+        el.classList.toggle("active");
+    });
+}
+</script>
+
+</html>
