@@ -1,0 +1,4 @@
+# ninja log v5
+0	6	0	clean	598c103dcec0f8a0
+1	360	1616440856	CMakeFiles/native-lib.dir/native-lib.cpp.o	21f5adf58ba4bb74
+360	418	1616440856	/home/vivek/AndroidStudioProjects/MyApplication/app/build/intermediates/cmake/debug/obj/armeabi-v7a/libnative-lib.so	c4cc6c749b478e78

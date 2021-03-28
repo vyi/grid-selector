@@ -1,0 +1,6 @@
+# ninja log v5
+0	576	1616410404	CMakeFiles/native-lib.dir/native-lib.cpp.o	dc84f841fe0608b4
+576	681	1616410404	/home/vivek/AndroidStudioProjects/MyApplication/app/build/intermediates/cmake/debug/obj/arm64-v8a/libnative-lib.so	b7ab21975b329693
+0	4	0	clean	598c103dcec0f8a0
+0	349	1616440856	CMakeFiles/native-lib.dir/native-lib.cpp.o	dc84f841fe0608b4
+349	402	1616440857	/home/vivek/AndroidStudioProjects/MyApplication/app/build/intermediates/cmake/debug/obj/arm64-v8a/libnative-lib.so	b7ab21975b329693
